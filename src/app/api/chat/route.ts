@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateChatResponse } from "@/lib/gemini";
 import { getCalendarEvents } from "@/lib/google-calendar";
-import { getNotionTasks } from "@/lib/notion";
+import { getGoogleTasks } from "@/lib/google-tasks";
 import type { ChatRequest, ScheduleContext } from "@/types";
 
 export async function POST(request: NextRequest) {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     if (includeSchedule) {
       const [events, tasks] = await Promise.allSettled([
         getCalendarEvents(14),
-        getNotionTasks(),
+        getGoogleTasks(),
       ]);
 
       scheduleContext = {
