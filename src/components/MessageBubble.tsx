@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import type { ChatMessage } from "@/types";
 
 interface Props {
@@ -9,10 +10,16 @@ interface Props {
 export default function MessageBubble({ message }: Props) {
   const isUser = message.role === "user";
 
-  const time = message.createdAt.toLocaleTimeString("ja-JP", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    setTime(
+      message.createdAt.toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    );
+  }, [message.createdAt]);
 
   // Simple markdown-like formatting: bold and newlines
   const formatContent = (text: string) => {
