@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import type { CalendarEvent, NotionTask } from "@/types";
+import type { CalendarEvent, GoogleTask } from "@/types";
 
 interface Props {
   onClose: () => void;
@@ -9,7 +9,7 @@ interface Props {
 
 interface ScheduleData {
   events: CalendarEvent[];
-  tasks: NotionTask[];
+  tasks: GoogleTask[];
   error?: string;
 }
 
@@ -146,10 +146,10 @@ export default function SchedulePanel({ onClose }: Props) {
               )}
             </section>
 
-            {/* Notion Tasks */}
+            {/* Google Tasks */}
             <section>
               <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                ✅ タスク ({data?.tasks.length ?? 0})
+                ✅ Todoリスト ({data?.tasks.length ?? 0})
               </h3>
               {data?.tasks.length === 0 ? (
                 <p className="text-xs text-gray-400">タスクはありません</p>
@@ -164,23 +164,13 @@ export default function SchedulePanel({ onClose }: Props) {
                           : "bg-gray-50 dark:bg-gray-700/50 border-gray-100 dark:border-gray-700"
                       }`}
                     >
-                      <a
-                        href={task.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-gray-900 dark:text-white hover:underline line-clamp-2"
-                      >
+                      <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
                         {task.title}
-                      </a>
+                      </p>
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
                         <span className="text-xs bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-1.5 py-0.5 rounded">
-                          {task.status}
+                          {task.taskListTitle}
                         </span>
-                        {task.priority && (
-                          <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-1.5 py-0.5 rounded">
-                            {task.priority}
-                          </span>
-                        )}
                         {task.dueDate && (
                           <span
                             className={`text-xs ${
@@ -191,6 +181,11 @@ export default function SchedulePanel({ onClose }: Props) {
                           >
                             期日: {task.dueDate}
                             {isUpcoming(task.dueDate) && " ⚠️"}
+                          </span>
+                        )}
+                        {task.notes && (
+                          <span className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-full">
+                            {task.notes}
                           </span>
                         )}
                       </div>
@@ -205,3 +200,4 @@ export default function SchedulePanel({ onClose }: Props) {
     </div>
   );
 }
+

@@ -46,16 +46,16 @@ function formatScheduleContext(context: ScheduleContext): string {
     }
   }
 
-  lines.push("", "### Notionタスク");
+  lines.push("", "### Google Todoリストのタスク");
 
   if (context.tasks.length === 0) {
     lines.push("（タスクなし）");
   } else {
     for (const task of context.tasks) {
       const due = task.dueDate ? ` 期日: ${task.dueDate}` : "";
-      const priority = task.priority ? ` 優先度: ${task.priority}` : "";
+      const list = ` [${task.taskListTitle}]`;
       lines.push(
-        `- **${task.title}** [${task.status}]${due}${priority}`
+        `- **${task.title}** [${task.status === "needsAction" ? "未完了" : task.status}]${due}${list}`
       );
     }
   }
@@ -64,7 +64,7 @@ function formatScheduleContext(context: ScheduleContext): string {
 }
 
 const SYSTEM_PROMPT = `あなたは優秀なスケジュール管理コンサルタントAIです。
-ユーザーのGoogleカレンダーとNotionのタスクを把握した上で、以下のことを支援します：
+ユーザーのGoogleカレンダーとGoogle Todoリストのタスクを把握した上で、以下のことを支援します：
 
 1. **予定の確認**: 今日・明日・今週の予定、締め切りが迫っているタスクを確認する
 2. **スケジュール調整**: 遊びの予定や新しい予定を追加・変更する際に、既存の予定を考慮して最適なタイミングを提案する

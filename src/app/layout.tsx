@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "AiConsult - AIスケジュールコンサルタント",
   description:
-    "NotionとGoogleカレンダーを連携したAIスケジュール管理コンサルタント",
+    "GoogleカレンダーとGoogle Todoリストを連携したAIスケジュール管理コンサルタント",
 };
 
 export default function RootLayout({

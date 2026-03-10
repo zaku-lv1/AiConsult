@@ -17,18 +17,19 @@ export interface CalendarEvent {
   isAllDay: boolean;
 }
 
-export interface NotionTask {
+export interface GoogleTask {
   id: string;
   title: string;
   status: string;
   dueDate?: string;
-  priority?: string;
-  url: string;
+  notes?: string;
+  taskListId: string;
+  taskListTitle: string;
 }
 
 export interface ScheduleContext {
   events: CalendarEvent[];
-  tasks: NotionTask[];
+  tasks: GoogleTask[];
   fetchedAt: string;
 }
 
@@ -44,6 +45,6 @@ export interface ChatResponse {
 
 export interface ScheduleResponse {
   events: CalendarEvent[];
-  tasks: NotionTask[];
+  tasks: GoogleTask[];
   error?: string;
 }

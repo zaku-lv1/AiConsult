@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCalendarEvents } from "@/lib/google-calendar";
-import { getNotionTasks } from "@/lib/notion";
+import { getGoogleTasks } from "@/lib/google-tasks";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 
   const [eventsResult, tasksResult] = await Promise.allSettled([
     getCalendarEvents(daysAhead),
-    getNotionTasks(),
+    getGoogleTasks(),
   ]);
 
   const events =
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
   }
   if (tasksResult.status === "rejected") {
     errors.push(
-      `Notion: ${tasksResult.reason instanceof Error ? tasksResult.reason.message : "取得エラー"}`
+      `Google Tasks: ${tasksResult.reason instanceof Error ? tasksResult.reason.message : "取得エラー"}`
     );
   }
 
