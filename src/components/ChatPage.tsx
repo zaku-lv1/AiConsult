@@ -20,7 +20,7 @@ export default function ChatPage() {
       id: "welcome",
       role: "assistant",
       content:
-        "こんにちは！AIスケジュールコンサルタントです😊\nGoogleカレンダーとNotionと連携して、スケジュール管理をお手伝いします。\n\n今日の予定確認、締め切りチェック、スケジュール立案、予定の相談など、何でもお気軽にどうぞ！",
+        "こんにちは！AIスケジュールコンサルタントです😊\nGoogleカレンダーとGoogle Todoリストと連携して、スケジュール管理をお手伝いします。\n\n今日の予定確認、締め切りチェック、スケジュール立案、予定の相談など、何でもお気軽にどうぞ！",
       createdAt: new Date(),
     },
   ]);
@@ -150,7 +150,7 @@ export default function ChatPage() {
                 AIスケジュールコンサルタント
               </h1>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Gemini × Notion × Google Calendar
+                Gemini × Google Calendar × Google Todo
               </p>
             </div>
           </div>

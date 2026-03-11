@@ -79,7 +79,7 @@ export async function generateChatResponse(
   scheduleContext?: ScheduleContext
 ): Promise<string> {
   const genAI = getGeminiClient();
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   // Build history for multi-turn conversation (all but the last message)
   const history = messages.slice(0, -1).map((m) => ({
@@ -89,9 +89,7 @@ export async function generateChatResponse(
 
   const chat = model.startChat({
     history,
-    systemInstruction: {
-      parts: [{ text: SYSTEM_PROMPT }],
-    },
+    systemInstruction: SYSTEM_PROMPT,
   });
 
   const lastMessage = messages[messages.length - 1];
