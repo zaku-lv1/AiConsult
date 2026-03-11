@@ -89,7 +89,9 @@ export async function generateChatResponse(
 
   const chat = model.startChat({
     history,
-    systemInstruction: SYSTEM_PROMPT,
+    systemInstruction: {
+      parts: [{ text: SYSTEM_PROMPT }],
+    },
   });
 
   const lastMessage = messages[messages.length - 1];
