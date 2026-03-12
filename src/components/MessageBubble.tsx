@@ -74,7 +74,7 @@ export default function MessageBubble({ message }: Props) {
 
       {isUser && (
         <div className="shrink-0 h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-200 text-xs font-bold">
-          You
+          私
         </div>
       )}
     </div>
